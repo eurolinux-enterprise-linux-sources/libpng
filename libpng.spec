@@ -1,8 +1,8 @@
 Summary: A library of functions for manipulating PNG image format files
 Name: libpng
 Epoch: 2
-Version: 1.2.46
-Release: 2%{?dist}
+Version: 1.2.48
+Release: 1%{?dist}
 License: zlib
 Group: System Environment/Libraries
 URL: http://www.libpng.org/pub/png/
@@ -13,7 +13,6 @@ Source: ftp://ftp.simplesystems.org/pub/png/src/libpng-%{version}.tar.bz2
 
 Patch0: libpng-multilib.patch
 Patch1: libpng-pngconf.patch
-Patch2: libpng-cve-2011-3026.patch
 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: zlib-devel, pkgconfig
@@ -57,7 +56,6 @@ necessary for some boot packages.
 
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 %configure
@@ -96,6 +94,10 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/libpng12.la
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sun Mar 11 2012 Tom Lane <tgl@redhat.com> 2:1.2.48-1
+- Update to libpng 1.2.48, for minor security issues (CVE-2011-3045)
+Resolves: #801663
+
 * Thu Feb 16 2012 Tom Lane <tgl@redhat.com> 2:1.2.46-2
 - Fix CVE-2011-3026
 Resolves: #791007
