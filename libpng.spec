@@ -1,7 +1,7 @@
 Summary: A library of functions for manipulating PNG image format files
 Name: libpng
 Epoch: 2
-Version: 1.2.48
+Version: 1.2.49
 Release: 1%{?dist}
 License: zlib
 Group: System Environment/Libraries
@@ -94,6 +94,10 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/libpng12.la
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Wed Apr 18 2012 Tom Lane <tgl@redhat.com> 2:1.2.49-1
+- Update to libpng 1.2.49, for minor security issues (CVE-2011-3048)
+Resolves: #812714
+
 * Sun Mar 11 2012 Tom Lane <tgl@redhat.com> 2:1.2.48-1
 - Update to libpng 1.2.48, for minor security issues (CVE-2011-3045)
 Resolves: #801663
