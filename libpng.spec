@@ -2,7 +2,7 @@ Summary: A library of functions for manipulating PNG image format files
 Name: libpng
 Epoch: 2
 Version: 1.2.49
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: zlib
 Group: System Environment/Libraries
 URL: http://www.libpng.org/pub/png/
@@ -13,6 +13,8 @@ Source: ftp://ftp.simplesystems.org/pub/png/src/libpng-%{version}.tar.bz2
 
 Patch0: libpng-multilib.patch
 Patch1: libpng-pngconf.patch
+Patch2: libpng-CVE-2015-7981.patch
+Patch3: libpng-CVE-2015-8126.patch
 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: zlib-devel, pkgconfig
@@ -56,6 +58,8 @@ necessary for some boot packages.
 
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
 %configure
@@ -94,22 +98,26 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/libpng12.la
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Mon Nov 23 2015 Petr Hracek <phracek@redhat.com> - 2:1.2.49-2
+- Security fix for CVE-2015-7981 and CVE-2015-8126
+- Resolves: #1283572
+
 * Wed Apr 18 2012 Tom Lane <tgl@redhat.com> 2:1.2.49-1
 - Update to libpng 1.2.49, for minor security issues (CVE-2011-3048)
-Resolves: #812714
+Resolves: #812715
 
 * Sun Mar 11 2012 Tom Lane <tgl@redhat.com> 2:1.2.48-1
 - Update to libpng 1.2.48, for minor security issues (CVE-2011-3045)
-Resolves: #801663
+Resolves: #801664
 
 * Thu Feb 16 2012 Tom Lane <tgl@redhat.com> 2:1.2.46-2
 - Fix CVE-2011-3026
-Resolves: #791007
+Resolves: #791008
 
 * Thu Jul 14 2011 Tom Lane <tgl@redhat.com> 2:1.2.46-1
 - Update to libpng 1.2.46, includes fixes for CVE-2011-2501, CVE-2011-2690,
   CVE-2011-2691, CVE-2011-2692
-Resolves: #721305
+Resolves: #721306
 
 * Tue Jun 29 2010 Tom Lane <tgl@redhat.com> 2:1.2.44-1
 - Update to libpng 1.2.44, includes fixes for CVE-2010-1205 and CVE-2010-2249
@@ -377,7 +385,7 @@ Resolves: #226038
 * Sun Sep  3 2000 Florian La Roche <Florian.LaRoche@redhat.de>
 - only include the man5 man-pages once in the main rpm
 
-* Thu Jul 28 2000 Preston Brown <pbrown@redhat.com>
+* Fri Jul 28 2000 Preston Brown <pbrown@redhat.com>
 - upgrade to 1.0.8 - fixes small memory leak, other bugs
 
 * Thu Jul 13 2000 Prospector <bugzilla@redhat.com>
