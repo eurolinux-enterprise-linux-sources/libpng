@@ -2,7 +2,7 @@ Summary: A library of functions for manipulating PNG image format files
 Name: libpng
 Epoch: 2
 Version: 1.5.13
-Release: 2%{?dist}
+Release: 5%{?dist}
 License: zlib
 Group: System Environment/Libraries
 URL: http://www.libpng.org/pub/png/
@@ -14,6 +14,7 @@ Source0: ftp://ftp.simplesystems.org/pub/png/src/libpng-%{version}.tar.bz2
 Source1: pngusr.dfa
 
 Patch0: libpng-multilib.patch
+Patch1: libpng-CVE-2013-6954.patch
 
 BuildRequires: zlib-devel, pkgconfig
 
@@ -58,6 +59,7 @@ necessary for some boot packages.
 cp -p %{SOURCE1} .
 
 %patch0 -p1
+%patch1 -p1
 
 %build
 %configure
@@ -89,6 +91,16 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_libdir}/libpng*.a
 
 %changelog
+* Wed Jan 29 2014 Petr Hracek <phracek@redhat.com> - 2:1.5.13-5
+- Adding patch CVE-2013-6954
+- Resolves: #1056863 
+
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 2:1.5.13-4
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 2:1.5.13-3
+- Mass rebuild 2013-12-27
+
 * Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2:1.5.13-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
@@ -417,7 +429,7 @@ Resolves: #226038
 * Sun Sep  3 2000 Florian La Roche <Florian.LaRoche@redhat.de>
 - only include the man5 man-pages once in the main rpm
 
-* Thu Jul 28 2000 Preston Brown <pbrown@redhat.com>
+* Fri Jul 28 2000 Preston Brown <pbrown@redhat.com>
 - upgrade to 1.0.8 - fixes small memory leak, other bugs
 
 * Thu Jul 13 2000 Prospector <bugzilla@redhat.com>
