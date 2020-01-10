@@ -2,7 +2,7 @@ Summary: A library of functions for manipulating PNG image format files
 Name: libpng
 Epoch: 2
 Version: 1.5.13
-Release: 5%{?dist}
+Release: 7%{?dist}
 License: zlib
 Group: System Environment/Libraries
 URL: http://www.libpng.org/pub/png/
@@ -15,6 +15,7 @@ Source1: pngusr.dfa
 
 Patch0: libpng-multilib.patch
 Patch1: libpng-CVE-2013-6954.patch
+Patch2: libpng-CVE-2015-8126.patch
 
 BuildRequires: zlib-devel, pkgconfig
 
@@ -60,6 +61,7 @@ cp -p %{SOURCE1} .
 
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %configure
@@ -91,6 +93,15 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_libdir}/libpng*.a
 
 %changelog
+* Sat Nov 28 2015 Petr Hracek <phracek@redhat.com> - 2:1.5.13-7
+- Security fix for CVE-2015-8126
+- Changing png_ptr to info_ptf based on upstream
+- Related: #1283576
+
+* Fri Nov 20 2015 Petr Hracek <phracek@redhat.com> - 2:1.5.13-6
+- Security fix for CVE-2015-8126
+- Resolves: #1283576
+
 * Wed Jan 29 2014 Petr Hracek <phracek@redhat.com> - 2:1.5.13-5
 - Adding patch CVE-2013-6954
 - Resolves: #1056863 
